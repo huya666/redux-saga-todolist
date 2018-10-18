@@ -1,17 +1,15 @@
-clone下来需执行
+$ cd /todolist/sever
 
-  npm install
+$ npm install
 
-然后进行server目录再次执行 
+$ cd todolist
 
-  npm install
+$ npm install
 
-  nodemon index.js  //开启服务
+$ npm start
 
-启动项目
+$ nodemon index.js
 
-  npm start
 
-需要安装mongodb 及node
-
-联系 597414767@qq.com 
+must be install mongodb and node
+email 597414767@qq.com 
