@@ -1,4 +1,4 @@
-import { put, call, select, take } from 'redux-saga/effects';
+import { put, call, take } from 'redux-saga/effects';
 import { actionTypes } from '../common/actionTypes';
 import { finishedlist, removelist, modifylist, clearlist } from '../api/list';
 
@@ -54,7 +54,6 @@ export function* modifyItemFlow() {
   while (true) {
     let { data } = yield take(actionTypes.MODIFY_ITEM)
     let res = yield call(modifyItem, data)
-    let tempList = yield select(state => state.getTodoList.list);
     let list = res.data.data
     yield put({
       type: actionTypes.UPDATE_DATA,

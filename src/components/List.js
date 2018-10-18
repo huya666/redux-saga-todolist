@@ -31,6 +31,7 @@ class List extends React.Component{
       if(item._id === index){
         finished = !item.finished;
       }
+      return {};
     })
     this.props.toggleItem({_id:index, finished});
   }
@@ -65,6 +66,8 @@ class List extends React.Component{
                 <ListItem finished={item.finished} handleToggle={this.handleToggle} handleChangeValue={this.handleChangeValue} handleRemove={this.handleRemove} key={item._id} item={item} />
               )
             }
+
+            return null
           })
         }
         
@@ -79,6 +82,7 @@ class List extends React.Component{
                 <ListItem finished={item.finished} handleToggle={this.handleToggle} handleChangeValue={this.handleChangeValue} handleRemove={this.handleRemove} key={item._id} item={item} />
               )
             }
+            return null
           })
         }
       </div>
