@@ -2,15 +2,21 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { modifyItem, removeItem, toggleItem, getListItem } from '../actions';
 import { connect } from 'react-redux';
-import ListItem from './ListItem'
+import ListItem from './ListItem';
+
+// import { SocketProvider } from 'socket.io-react';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:9999');
 
 class List extends React.Component{
   constructor(props){
     super(props);
-    this.state={}
+    this.state={content: '11'}
     this.handleChangeValue=this.handleChangeValue.bind(this);
     this.handleRemove=this.handleRemove.bind(this);
     this.handleToggle=this.handleToggle.bind(this);
+    this.handleTestSocket = this.handleTestSocket.bind(this)
   }
   handleChangeValue(e){
     if(e.keyCode!== 13){return false;}
@@ -37,11 +43,46 @@ class List extends React.Component{
   }
 
   componentDidMount(){
-    this.props.getListItem()
+    this.props.getListItem();
+
+    let socket = io('http://localhost:9999');
+
+    // let interval = setInterval(()=>{
+    //   socket.emit('random', Math.random());
+    // }, 2000);
+
+    // socket.on('warn', count=>{
+    //   console.log('warning count : '+count);
+    // });
+
+    // socket.on('disconnect', ()=>{
+    //   clearInterval(interval);
+    // });
+
+    socket.emit('client message', {msg:'hi, server'});
+
+    // socket.on()用于接收服务端发来的消息
+    socket.on('connect',  ()=>{
+      console.log('client connect server');
+    });
+    socket.on('disconnect', ()=>{
+      console.log('client disconnect');
+    });
+  }
+
+  handleTestSocket(){
+    socket.emit('button', 'mmmmm');
+
+    // socket.on()用于接收服务端发来的消息
+    socket.on('button',  res=>{
+      this.setState({content: res})
+    });
+
+
   }
 
   render(){
-    console.log(this.props)
+    
     let { list } = this.props;
     let finishedNumber = 0;
     let number = 0;
@@ -66,7 +107,6 @@ class List extends React.Component{
                 <ListItem finished={item.finished} handleToggle={this.handleToggle} handleChangeValue={this.handleChangeValue} handleRemove={this.handleRemove} key={item._id} item={item} />
               )
             }
-
             return null
           })
         }
@@ -85,6 +125,8 @@ class List extends React.Component{
             return null
           })
         }
+
+        <button onClick={this.handleTestSocket}>{this.state.content}</button>
       </div>
     )
   }
