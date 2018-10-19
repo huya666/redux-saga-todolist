@@ -1,14 +1,14 @@
 $ cd /todolist/sever
 
+$ nodemon index.js
+
 $ npm install
 
-$ cd todolist
+$ cd /todolist
 
 $ npm install
 
 $ npm start
-
-$ nodemon index.js
 
 must be install mongodb and node
 
