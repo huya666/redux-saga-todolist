@@ -41,6 +41,7 @@ class List extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     let { list } = this.props;
     let finishedNumber = 0;
     let number = 0;
@@ -52,7 +53,6 @@ class List extends React.Component{
       }
       return {}
     })
-    console.log(this.props.list, 'list')
     return(
       <div style={{width: '100%', display:'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '30px', overflow:'hidden'}}>
         <div style={{width: '600px', height:'48px', lineHeight: '48px', display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -91,6 +91,7 @@ class List extends React.Component{
 }
 
 function mapStateToProps(state){
+  console.log(state, 'state')
   return {
     list: state.getTodoList.list
   }
