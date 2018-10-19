@@ -3,8 +3,6 @@ import { put, call, take } from 'redux-saga/effects';
 import {actionTypes} from '../common/actionTypes';
 import { addlist, getlistitem} from '../api/list'
 
-// const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
 function* getListItem(){
   try{
     return yield call(getlistitem)
@@ -19,7 +17,7 @@ export function* getListItemFlow(){
     let res = yield call(getListItem);
     if(res.data.code === 1){
       let list = res.data.data;
-      yield put({  //触发action
+      yield put({
         type: actionTypes.UPDATE_DATA,
         data: list
       })
