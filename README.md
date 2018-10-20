@@ -52,7 +52,7 @@ react List.js
 + const socket = io('http://localhost:9999');
 
 + componentDidMount(){  //只是为了测试
-+   this.props.getListItem();
+     this.props.getListItem();
 +   socket.emit('click1');
 +   socket.on('click2', data => {
 +     console.log(data)
