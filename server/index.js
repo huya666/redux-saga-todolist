@@ -110,36 +110,13 @@ app.post('/list/clear', (req, res) => {
 })
 
 
-io.on('connection',  (socket)=>{
-  // console.log('client connect server, ok!');
-
-  // // io.emit()方法用于向服务端发送消息，参数1表示自定义的数据名，参数2表示需要配合事件传入的参数
-  // io.emit('server message', {msg:'client connect server success'});
-
-  // // socket.broadcast.emmit()表示向除了自己以外的客户端发送消息
-  // socket.broadcast.emit('server message', {msg:'broadcast'});
-
-
-  // // 监听断开连接状态：socket的disconnect事件表示客户端与服务端断开连接
-  socket.on('disconnect', ()=>{
-    console.log('connect disconnect');
-  });
-  
-  // // 与客户端对应的接收指定的消息
-  // socket.on('client message', (data)=>{
-  //   console.log(data);// hi server
-  // });
-
-  socket.on('button', req => {
-    console.log(req, '1111')
-    socket.emit('button', req);
+io.sockets.on('connection', function (socket) { //只是为了测试
+  socket.on('click1',function(data){
+    console.log('监听点击事件');
+    socket.emit('click2', {datas: data});
+    socket.broadcast.emit('click2',  {datas: data});
   })
- 
-
-  // socket.disconnect();
-
-
-});
+})
 
 
 httpServer.listen('9999')

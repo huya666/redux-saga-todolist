@@ -4,7 +4,6 @@ import { modifyItem, removeItem, toggleItem, getListItem } from '../actions';
 import { connect } from 'react-redux';
 import ListItem from './ListItem';
 
-// import { SocketProvider } from 'socket.io-react';
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:9999');
@@ -42,43 +41,16 @@ class List extends React.Component{
     this.props.toggleItem({_id:index, finished});
   }
 
-  componentDidMount(){
+  componentDidMount(){  //只是为了测试
     this.props.getListItem();
-
-    let socket = io('http://localhost:9999');
-
-    // let interval = setInterval(()=>{
-    //   socket.emit('random', Math.random());
-    // }, 2000);
-
-    // socket.on('warn', count=>{
-    //   console.log('warning count : '+count);
-    // });
-
-    // socket.on('disconnect', ()=>{
-    //   clearInterval(interval);
-    // });
-
-    socket.emit('client message', {msg:'hi, server'});
-
-    // socket.on()用于接收服务端发来的消息
-    socket.on('connect',  ()=>{
-      console.log('client connect server');
-    });
-    socket.on('disconnect', ()=>{
-      console.log('client disconnect');
-    });
+    socket.emit('click1');
+    socket.on('click2', data => {
+      console.log(data)
+    })
   }
 
   handleTestSocket(){
-    socket.emit('button', 'mmmmm');
-
-    // socket.on()用于接收服务端发来的消息
-    socket.on('button',  res=>{
-      this.setState({content: res})
-    });
-
-
+    socket.emit('click1', '11'); // //只是为了测试
   }
 
   render(){
@@ -133,7 +105,6 @@ class List extends React.Component{
 }
 
 function mapStateToProps(state){
-  console.log(state, 'state')
   return {
     list: state.getTodoList.list
   }
