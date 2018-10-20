@@ -1,20 +1,21 @@
-$ cd /todolist/sever
+``` 
+cd /todolist/sever
 
-$ nodemon index.js
+ nodemon index.js
 
-$ npm install
+ npm install
 
-$ cd /todolist
+ cd /todolist
 
-$ npm install
+ npm install
 
-$ npm start
+ npm start
+
+ ```
 
 must be install mongodb and node
 
-email 597414767@qq.com
-
-最近在开发一个聊天功能的模块，于是刚在在这里做了socket.io测试
+最近在开发一个聊天功能的模块，于是在这里做了socket.io测试
 
 cd /todolist/sever
 
